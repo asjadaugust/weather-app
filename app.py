@@ -21,7 +21,7 @@ df["DATE"] = df["DATE"].apply(datetime)
 
 options = []
 
-cols = [ dict(label = "PRCP", value = "PRCP"), dict(label = "TMAX", value = "TMAX")]
+cols = [ dict(label = "Precipitation", value = "PRCP"), dict(label = "Max Temp", value = "TMAX")]
 
 for option in df["NAME"].unique():
     mydict = {}
@@ -30,21 +30,22 @@ for option in df["NAME"].unique():
     options.append(mydict)
 
 app.layout = html.Div(html.Div([
-                    html.H1("Weather Report", style={"paddingTop":"1%", "paddingLeft": "1%"}),
+                    html.H1("Weather Stats", style={"paddingTop":"1%", "paddingLeft": "2%", 'fontSize': 34, 'lineHeight': 1.5, 'font-family': "'Segoe UI',Roboto, Arial, sans-serif"}),
+                    html.Hr(style={"width": "97%"}),
                     html.Div([
-                    html.Label('Select a City: ', style={'paddingRight': '30px'}),
+                    html.Label('Select a City: ', style={'fontSize': 16, 'lineHeight': 1.5, 'font-family': "Helvetica Neue, Helvetica, Arial, sans-serif"}),
                     dcc.Dropdown(
                                 id = 'cities-ddl',
                                 options=options,
-                                value=['New York'],
+                                value=['New York', 'New Delhi'],
                                 multi=True,
                                 style={'padding': '0.5%'}
                             )
                     ],
-                                style = {'display': 'inline-block', 'verticalAlign': 'top', 'width': '63%', "marginLeft":"1%"}
+                                style = {'display': 'inline-block', 'verticalAlign': 'top', 'width': '62%', "marginLeft":"1%"}
                     ),
                     html.Div([
-                        html.Label('Select a Date Range: ', style={'paddingRight': '30px'}),
+                        html.Label('Select a Date Range: ', style={'fontSize': 16, 'lineHeight': 1.5, 'font-family': "Helvetica Neue, Helvetica, Arial, sans-serif"}),
                         dcc.DatePickerRange(
                                  id='date-picker',
                                  min_date_allowed = dt(2010, 1, 1),
@@ -61,7 +62,7 @@ app.layout = html.Div(html.Div([
                         options=cols,
                         value='PRCP'
                     )],
-                    style = {'display': 'inline-block',"width": "75px", 'marginTop': '1.5%'}
+                    style = {'display': 'inline-block',"width": "9%", 'marginTop': '1.5%'}
                     ),
                     dcc.Tabs(id="tabs", children=[
                         dcc.Tab(label='Line Chart', children=[

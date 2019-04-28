@@ -37,7 +37,7 @@ app.layout = html.Div(html.Div([
                     #     dcc.Tab(label='Home', children=[
 
                             html.Div([
-                            html.Label('Select a City: ', style={'fontSize': 16, 'lineHeight': 1.5, 'font-family': "Helvetica Neue, Helvetica, Arial, sans-serif"}),
+                            html.Label('Select a City Name: ', style={'fontSize': 16, 'lineHeight': 1.5, 'font-family': "Helvetica Neue, Helvetica, Arial, sans-serif"}),
                             dcc.Dropdown(
                                         id = 'cities-ddl',
                                         options=options,

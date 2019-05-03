@@ -1,0 +1,9 @@
+<h3>Design Decision</h3>
+<p>We wanted to visually compare the weather of two or more cities using existing dataset, Hence we used line graph since time-series visualization is involved and its clearer to differentiate if less than five cities are selected.</p>
+<p>We also included a bar chart to further display the distinction. In order to get better results, we should select shorter range</p>
+
+<h3>Technology Used</h3>
+<p><strong>Dash</strong> is used to make the web-application, however we used <strong>Plotly</strong> for the visualization</p>
+
+<h3>Other Alternatives</h3>
+<p>We started with d3.js but it was difficult to interpret given the timeline, then we moved on to chart.js, which we later found to be less flexible. Hence, we chose Plotly because it came with Dash which only required the use of <strong>Python</strong>.</p>

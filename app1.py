@@ -7,12 +7,26 @@ import pandas as pd
 from datetime import datetime as dt
 import plotly.figure_factory as ff
 import colorlover as cl
+from opencage.geocoder import OpenCageGeocode
+import requests
 
 app = dash.Dash()
 server = app.server
 
 df = pd.read_csv("data.csv")
 df.fillna(df.mean(), inplace=True)
+
+keys = {}
+with open("keys.txt") as myfile:
+    for line in myfile:
+        name, var = line.partition("=")[::2]
+        keys[name.strip()] = var
+
+def get_coords():
+    query = u'Bosutska ulica 10, Trnje, Zagreb, Croatia'
+    results = geocoder.geocode(query)
+
+    return results[0]['geometry']['lat'], results[0]['geometry']['lng']
 
 def datetime(str):
     date_time = dt.strptime(str, '%d-%m-%Y')
@@ -30,6 +44,14 @@ for option in df["NAME"].unique():
     mydict['value'] = option
     options.append(mydict)
 
+print(keys["fwd_geo"])
+geocoder = OpenCageGeocode(keys["fwd_geo"])
+x_coord, y_coord = get_coords()
+r = requests.get("https://api.darksky.net/forecast/52e3143258aebaaa5db2305e28fbc610/37.8267,-122.4233")
+print(r.json()["currently"]["time"])
+
+print(x_coord)
+print(y_coord)
 app.layout = html.Div(html.Div([
                     html.H1("Weather Stats", style={"paddingTop":"1%", "paddingLeft": "2%", 'fontSize': 34, 'lineHeight': 1.5, 'font-family': "'Segoe UI',Roboto, Arial, sans-serif"}),
                     html.Hr(style={"width": "97%"}),
